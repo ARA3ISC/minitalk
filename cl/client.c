@@ -6,7 +6,7 @@
 /*   By: maneddam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 19:17:08 by maneddam          #+#    #+#             */
-/*   Updated: 2023/02/09 21:50:25 by maneddam         ###   ########.fr       */
+/*   Updated: 2023/02/18 23:18:59 by maneddam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_error(char *msg)
 {
-	ft_printf(RED"🚫 %s 🚫\n", msg);
+	ft_printf(RED "🚫 %s 🚫\n", msg);
 	exit(EXIT_FAILURE);
 }
 

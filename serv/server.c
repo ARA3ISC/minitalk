@@ -6,7 +6,7 @@
 /*   By: maneddam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 19:01:23 by maneddam          #+#    #+#             */
-/*   Updated: 2023/02/09 15:11:37 by maneddam         ###   ########.fr       */
+/*   Updated: 2023/02/18 23:19:04 by maneddam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	manipulate(int signo)
 		i = i << 1;
 }
 
-
 int	main(int argc, char *argv[])
 {
 	int	pid;
@@ -39,8 +38,8 @@ int	main(int argc, char *argv[])
 	if (argc == 1)
 	{
 		pid = getpid();
-		ft_printf(GREEN" ⚙️->\tprocess id : %d ⚙️\n", pid);
-		ft_printf(PURPLE"Waiting for a message from the client 🕙"RESET);
+		ft_printf(GREEN " ⚙️->\tprocess id : %d ⚙️\n", pid);
+		ft_printf(PURPLE "Waiting for a message from the client 🕙" RESET);
 		while (1)
 		{
 			signal(SIGUSR2, &manipulate);

@@ -6,17 +6,15 @@
 /*   By: maneddam <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 15:12:59 by maneddam          #+#    #+#             */
-/*   Updated: 2023/02/09 16:59:25 by maneddam         ###   ########.fr       */
+/*   Updated: 2023/02/18 23:18:54 by maneddam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk_bonus.h"
 
-int		target_pid;
-
 void	print_error(char *msg)
 {
-	ft_printf(RED"🚫 %s 🚫\n", msg);
+	ft_printf(RED "🚫 %s 🚫\n", msg);
 	exit(EXIT_FAILURE);
 }
 
@@ -39,23 +37,17 @@ void	send_data(pid_t target_pid, int c)
 	}
 }
 
-void	check(int signo, siginfo_t *info, void	*context)
+void	check(int signo)
 {
-	(void)context;
-	if (signo == SIGUSR1 && target_pid == info->si_pid)
-		ft_printf("\e[033;0;32m→	Sent signal to server. ✅\e[0m\n");
-	else
-	{
-		ft_printf("\e[033;0;31m→	Wrong signal. ❌\e[0m\n");
-		exit(1);
-	}
+	if (signo == SIGUSR1)
+		ft_printf(GREEN "→	Message sent successfuly. ✅\n");
 }
 
 int	main(int argc, char *argv[])
 {
+	int		target_pid;
 	char	*msg;
 	int		i;
-	struct sigaction sa;
 
 	if (argc == 3)
 	{
@@ -64,15 +56,7 @@ int	main(int argc, char *argv[])
 			print_error("No process is running under this PID!!");
 		msg = argv[2];
 		i = 0;
-
-		sa.sa_sigaction = check;
-		sa.sa_flags = SA_SIGINFO;
-		sigemptyset(&sa.sa_mask);
-		if (sigaction(SIGUSR1, &sa, NULL) == -1)
-		{
-			ft_printf("\e[033;0;31m→	Ops!! PID not correct. ❌\e[0m\n");
-			exit(1);
-		}
+		signal(SIGUSR1, &check);
 		while (msg[i])
 		{
 			send_data(target_pid, msg[i]);
